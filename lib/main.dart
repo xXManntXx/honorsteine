@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honorsteine/api_test.dart';
 import 'package:honorsteine/homepage.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Honorsteine'),
+      home: const Api_Test(),
     );
   }
 }
