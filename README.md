@@ -1,16 +1,7 @@
-# honorsteine
+# Honorsteine App
 
-Flutter project Creating an app to enhance experience around stolpersteine
 
-## Getting Started
+The main goal of our Stolpersteine App is to create a meaningful platform that enables users to engage with the stolpersteine memorials and honor the victims of war. 
 
-This project is a starting point for a Flutter application.
+This application will be available for both iOS and Android devices,for that we will code using IOS and Flutter.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
