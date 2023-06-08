@@ -21,9 +21,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.all(40.0),
+              child: Text(
                 'Welcome to Honorsteine main page.',
               ),
             ),

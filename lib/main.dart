@@ -1,13 +1,16 @@
+
 import 'package:flutter/material.dart';
-import 'package:honorsteine/api_test.dart';
-import 'package:honorsteine/homepage.dart';
+import 'api/chat_api.dart';
+import 'chat_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChatApp(chatApi: ChatApi()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ChatApp extends StatelessWidget {
+  const ChatApp({required this.chatApi, super.key});
+
+  final ChatApi chatApi;
 
   // This widget is the root of your application.
   @override
@@ -26,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Api_Test(),
+      home: ChatPage(chatApi: chatApi),
     );
   }
 }

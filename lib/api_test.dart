@@ -68,7 +68,7 @@ class _Api_TestState extends State<Api_Test> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Api Test"),
+        title: const Text("Api Test"),
       ),
       body: Center(
         child: Column(
