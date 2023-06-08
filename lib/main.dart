@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:honorsteine/api_test.dart';
-import 'package:honorsteine/homepage.dart';
+import 'package:honorsteine/screens/splashScreen.dart';
+import 'package:honorsteine/maps_test.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Api_Test(),
+      home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:honorsteine/API_res/stolpersteineData.dart';
+import 'package:honorsteine/screens/victimListPage.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.allVictims});
 
   final String title;
+  final Future<List<StolpersteineData>> allVictims;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +35,16 @@ class _MyHomePageState extends State<MyHomePage> {
               '/!\\ App in construction /!\\',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Victim_List(allVictims: widget.allVictims,),
+                    ),
+                  );
+                },
+                child: Text("Access victim list"))
           ],
         ),
       ),
