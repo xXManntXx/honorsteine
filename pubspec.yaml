@@ -66,6 +66,10 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/HS_splash_screen_bg.png
+    - assets/HS_onboarding_1.png
+    - assets/HS_onboarding_2.png
+    - assets/HS_onboarding_3.png
+    - assets/HS_onboarding_4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

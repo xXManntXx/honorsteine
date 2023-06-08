@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:honorsteine/API_res/API_fetch.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/homepage.dart';
+import 'package:honorsteine/screens/onboardingPage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late Future<List<StolpersteineData>> allVictims;
+  bool firstUse = true;
   
   
   @override
@@ -22,10 +24,19 @@ class _SplashScreenState extends State<SplashScreen> {
     allVictims = fetchAPI();
     
     Timer(Duration(seconds: 4), () {
-      // Navigating to the next screen after 3 seconds
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MyHomePage(title: "Honorsteine", allVictims: allVictims,)),
-      );
+
+      if(firstUse) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) =>
+              OnBoardingPage(allVictims: allVictims,)),
+        );
+      }
+      else{
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) =>
+              MyHomePage(title: "Honorsteine", allVictims: allVictims,)),
+        );
+      }
     });
   }
 
