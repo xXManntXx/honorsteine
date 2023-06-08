@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:honorsteine/API_res/API_fetch.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/screens/victimListPage.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.allVictims});
 
   final String title;
+  final Future<List<StolpersteineData>> allVictims;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late Future<List<StolpersteineData>> allVictims;
-  
-  @override
-  void initState() {
-    super.initState();
-    allVictims = fetchAPI();
-  }
   
   
   @override
@@ -47,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Victim_List(allVictims: allVictims,),
+                      builder: (context) => Victim_List(allVictims: widget.allVictims,),
                     ),
                   );
                 },
