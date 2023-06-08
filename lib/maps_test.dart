@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:honorsteine/api_test.dart' as locations;
+import 'package:honorsteine/API_res/API_fetch.dart' as locations;
 
 void main() => runApp(const MyApp());
 
