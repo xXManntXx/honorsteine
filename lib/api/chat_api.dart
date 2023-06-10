@@ -6,7 +6,7 @@ class ChatApi {
   static const _model = 'gpt-3.5-turbo';
 
   ChatApi() {
-    OpenAI.apiKey = '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';
+    OpenAI.apiKey = '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';
     OpenAI.organization = 'org-gVwQTIcO5W7krA4nu4FivnjD';
   }
 
