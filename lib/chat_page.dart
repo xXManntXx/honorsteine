@@ -1,10 +1,9 @@
-import 'package:chatgpt_client/models/chat_message.dart';
-import 'package:chatgpt_client/widgets/message_bubble.dart';
-import 'package:chatgpt_client/widgets/message_composer.dart';
-
 import 'package:flutter/material.dart';
 
 import 'api/chat_api.dart';
+import 'models/chat_message.dart';
+import 'widgets/message_bubble.dart';
+import 'widgets/message_composer.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({

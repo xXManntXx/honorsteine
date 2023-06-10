@@ -2,7 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:honorsteine/API_res/URL_launcher.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
+import 'package:honorsteine/chat_page.dart';
 import 'package:honorsteine/custom_widgets/HS_button.dart';
+
+import '../api/chat_api.dart';
 
 class StolpersteineDetailsPage extends StatelessWidget {
   final StolpersteineData stolpersteineData;
@@ -11,6 +14,8 @@ class StolpersteineDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ChatApi chatApi = ChatApi();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Stolpersteine Details"),
@@ -147,6 +152,12 @@ class StolpersteineDetailsPage extends StatelessWidget {
                 text: "Talk with ${stolpersteineData.name}",
                 onPressed: (){
                   print(">>> Redirection to ${stolpersteineData.name} chat bot");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatPage(chatApi: chatApi),
+                    ),
+                  );
                 }
             )
           ],
