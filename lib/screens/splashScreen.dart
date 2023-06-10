@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:honorsteine/API_res/API_fetch.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
-import 'package:honorsteine/homepage.dart';
+import 'package:honorsteine/screens/homePage.dart';
 import 'package:honorsteine/screens/onboardingPage.dart';
 
 class SplashScreen extends StatefulWidget {

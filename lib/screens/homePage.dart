@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
+import 'package:honorsteine/custom_widgets/HS_button.dart';
+import 'package:honorsteine/custom_widgets/HS_texts.dart';
 import 'package:honorsteine/screens/victimListPage.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -23,26 +25,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: const Text(
-                'Welcome to Honorsteine main page.',
-              ),
+            const HS_text_title(
+              text : 'Welcome to Honorsteine main page.',
             ),
-            Text(
-              '/!\\ App in construction /!\\',
-              style: Theme.of(context).textTheme.headlineMedium,
+            const HS_text_content(
+              text : '/!\\ App in construction /!\\',
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Victim_List(allVictims: widget.allVictims,),
-                    ),
-                  );
-                },
-                child: Text("Access victim list"))
+            HS_button(
+              text: 'View all Stolpersteine',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Victim_List(allVictims: widget.allVictims,),
+                  ),
+                );
+              },
+            )
           ],
         ),
       ),

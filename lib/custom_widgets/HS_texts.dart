@@ -8,7 +8,7 @@ class HS_text_title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: const EdgeInsets.all(12.0),
       child: Text(
         text,
         style: const TextStyle(
@@ -28,7 +28,7 @@ class HS_text_content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: const EdgeInsets.all(12.0),
       child: Text(
         text,
         style: const TextStyle(

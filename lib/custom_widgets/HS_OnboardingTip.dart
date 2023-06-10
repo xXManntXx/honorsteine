@@ -25,11 +25,28 @@ class HS_OnBoardingTip extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         HS_text_title(text: title),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         HS_text_content(text: content),
       ],
     );
   }
+}
+
+List<HS_OnBoardingTip> getAllOnBoardingTips(){
+  return [
+    const HS_OnBoardingTip(
+      imageUrl: 'assets/HS_onboarding_1.png',
+      title: 'Choose a route',
+      content:
+      'Travel through the city, visit stolpersteines and experience the city',
+    ),
+    const HS_OnBoardingTip(
+      imageUrl: 'assets/HS_onboarding_2.png',
+      title: 'Find out whats nearby',
+      content:
+      'Granting the Honorsteine app access to your location will allow it to search for stones nearby',
+    ),
+  ];
 }

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:honorsteine/API_res/URL_launcher.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
-
+import 'package:honorsteine/custom_widgets/HS_button.dart';
 
 class StolpersteineDetailsPage extends StatelessWidget {
   final StolpersteineData stolpersteineData;
@@ -31,11 +31,10 @@ class StolpersteineDetailsPage extends StatelessWidget {
               ),
               trailing: stolpersteineData.photoLink.isNotEmpty
                   ? Image.network(
-                stolpersteineData.photoLink,
-                width: 90,
-                height: 90,
-                fit: BoxFit.cover,
-              )
+                      stolpersteineData.photoLink,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    )
                   : SizedBox(),
             ),
             SizedBox(height: 16),
@@ -144,6 +143,12 @@ class StolpersteineDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
+            HS_button(
+                text: "Talk with ${stolpersteineData.name}",
+                onPressed: (){
+                  print(">>> Redirection to ${stolpersteineData.name} chat bot");
+                }
+            )
           ],
         ),
       ),

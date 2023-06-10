@@ -13,12 +13,11 @@ class Victim_List extends StatefulWidget {
 }
 
 class _Victim_ListState extends State<Victim_List> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Api Test"),
+        title: Text("All stolpersteine"),
       ),
       body: Center(
         child: Column(
@@ -34,20 +33,32 @@ class _Victim_ListState extends State<Victim_List> {
                         scrollDirection: Axis.vertical,
                         itemCount: snapshot.data?.length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(snapshot.data![index].name),
-                            subtitle: Text(
-                                "Adress : ${snapshot.data![index].city}, ${snapshot.data![index].address} "),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      StolpersteineDetailsPage(
-                                          stolpersteineData: snapshot.data![index]),
-                                ),
-                              );
-                            },
+                          return Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: ListTile(
+                              leading:
+                                  snapshot.data![index].photoLink.isNotEmpty
+                                      ? Image.network(
+                                          snapshot.data![index].photoLink,
+                                          height: 130,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : SizedBox(),
+                              title: Text(snapshot.data![index].name),
+                              subtitle: Text(
+                                  "Adress : ${snapshot.data![index].city}, ${snapshot.data![index].address} "),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        StolpersteineDetailsPage(
+                                            stolpersteineData:
+                                                snapshot.data![index]),
+                                  ),
+                                );
+                              },
+                            ),
                           );
                         }),
                   );
