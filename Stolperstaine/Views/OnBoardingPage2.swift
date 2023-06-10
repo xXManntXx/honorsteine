@@ -30,24 +30,21 @@ struct OnBoardingPage2: View {
                     Image("ImageDot")
                         .resizable()
                         .frame(width: 50, height: 10)
-                        .offset(y: 30)
+                        .padding(.vertical, 20)
                     
-                    Button( action: {}){
-                      
-                            Text("EXPLORE THE CITY")
-                                .font(.system(size: 15))
-
-                    }
-                    .padding(.horizontal, 80)
-                    .padding(.vertical, 15)
-                    .background(.yellow)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .offset(y: 90)
-                    
+                    NavigationLink(destination: HomePage(), label: {
+                                   Text("Explore the City")
+                                     .padding(.horizontal, 80)
+                                     .padding(.vertical, 15)
+                                     .background(.yellow)
+                                     .foregroundColor(.white)
+                                     .cornerRadius(10)
+                               })
+                    .contentShape(Rectangle())
+                
                     
                 }
-                .offset(y:-100)
+               
                 .padding()
             }
             .ignoresSafeArea()

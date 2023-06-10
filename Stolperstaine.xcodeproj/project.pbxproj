@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1815E4C92A30E35A00444B61 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4C82A30E35A00444B61 /* ChatView.swift */; };
+		1815E4CB2A30F00600444B61 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4CA2A30F00600444B61 /* Constants.swift */; };
+		1815E4CD2A30F0F300444B61 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4CC2A30F0F300444B61 /* OpenAIService.swift */; };
+		1815E4D02A30FDDE00444B61 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1815E4CF2A30FDDE00444B61 /* Alamofire */; };
+		1815E4D22A31CA1400444B61 /* ButtonBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4D12A31CA1400444B61 /* ButtonBack.swift */; };
+		1815E4D42A31E91F00444B61 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4D32A31E91F00444B61 /* HomePage.swift */; };
+		1815E4D82A32484D00444B61 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4D72A32484D00444B61 /* NavBar.swift */; };
+		1815E4DA2A32489900444B61 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4D92A32489900444B61 /* Events.swift */; };
+		1815E4DC2A3248CE00444B61 /* ListOfCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4DB2A3248CE00444B61 /* ListOfCities.swift */; };
+		1815E4DE2A3248E700444B61 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4DD2A3248E700444B61 /* Map.swift */; };
+		1815E4E02A32491700444B61 /* MoreInfoVictim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4DF2A32491700444B61 /* MoreInfoVictim.swift */; };
+		1815E4E22A326A3700444B61 /* EventComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4E12A326A3700444B61 /* EventComponent.swift */; };
+		1815E4E42A338D8600444B61 /* MyRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4E32A338D8600444B61 /* MyRoutes.swift */; };
+		1815E4E62A3393AE00444B61 /* MyRoutesComp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1815E4E52A3393AE00444B61 /* MyRoutesComp.swift */; };
 		1830BB052A2E14E200CFFE66 /* StolperstaineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830BB042A2E14E200CFFE66 /* StolperstaineApp.swift */; };
 		1830BB072A2E14E200CFFE66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830BB062A2E14E200CFFE66 /* ContentView.swift */; };
 		1830BB092A2E14E400CFFE66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1830BB082A2E14E400CFFE66 /* Assets.xcassets */; };
@@ -15,6 +29,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1815E4C82A30E35A00444B61 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		1815E4CA2A30F00600444B61 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1815E4CC2A30F0F300444B61 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		1815E4D12A31CA1400444B61 /* ButtonBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ButtonBack.swift; path = Stolperstaine/Views/ButtonBack.swift; sourceTree = SOURCE_ROOT; };
+		1815E4D32A31E91F00444B61 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		1815E4D72A32484D00444B61 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
+		1815E4D92A32489900444B61 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		1815E4DB2A3248CE00444B61 /* ListOfCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfCities.swift; sourceTree = "<group>"; };
+		1815E4DD2A3248E700444B61 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		1815E4DF2A32491700444B61 /* MoreInfoVictim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoVictim.swift; sourceTree = "<group>"; };
+		1815E4E12A326A3700444B61 /* EventComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventComponent.swift; sourceTree = "<group>"; };
+		1815E4E32A338D8600444B61 /* MyRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutes.swift; sourceTree = "<group>"; };
+		1815E4E52A3393AE00444B61 /* MyRoutesComp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyRoutesComp.swift; path = Stolperstaine/Views/MyRoutesComp.swift; sourceTree = SOURCE_ROOT; };
 		1830BB012A2E14E200CFFE66 /* Stolperstaine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stolperstaine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1830BB042A2E14E200CFFE66 /* StolperstaineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StolperstaineApp.swift; sourceTree = "<group>"; };
 		1830BB062A2E14E200CFFE66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1815E4D02A30FDDE00444B61 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +102,29 @@
 			children = (
 				1830BB062A2E14E200CFFE66 /* ContentView.swift */,
 				1830BB122A2E5C9400CFFE66 /* OnBoardingPage2.swift */,
+				1815E4C82A30E35A00444B61 /* ChatView.swift */,
+				1815E4CC2A30F0F300444B61 /* OpenAIService.swift */,
+				1815E4D32A31E91F00444B61 /* HomePage.swift */,
+				1815E4E32A338D8600444B61 /* MyRoutes.swift */,
+				1815E4CA2A30F00600444B61 /* Constants.swift */,
+				1815E4DB2A3248CE00444B61 /* ListOfCities.swift */,
+				1815E4DD2A3248E700444B61 /* Map.swift */,
+				1815E4DF2A32491700444B61 /* MoreInfoVictim.swift */,
+				1815E4D92A32489900444B61 /* Events.swift */,
+				1830BB152A30D38300CFFE66 /* Elements */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1830BB152A30D38300CFFE66 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				1815E4E52A3393AE00444B61 /* MyRoutesComp.swift */,
+				1815E4D12A31CA1400444B61 /* ButtonBack.swift */,
+				1815E4D72A32484D00444B61 /* NavBar.swift */,
+				1815E4E12A326A3700444B61 /* EventComponent.swift */,
+			);
+			path = Elements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +143,9 @@
 			dependencies = (
 			);
 			name = Stolperstaine;
+			packageProductDependencies = (
+				1815E4CF2A30FDDE00444B61 /* Alamofire */,
+			);
 			productName = Stolperstaine;
 			productReference = 1830BB012A2E14E200CFFE66 /* Stolperstaine.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +174,9 @@
 				Base,
 			);
 			mainGroup = 1830BAF82A2E14E200CFFE66;
+			packageReferences = (
+				1815E4CE2A30FDDE00444B61 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 1830BB022A2E14E200CFFE66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -148,9 +203,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1815E4CB2A30F00600444B61 /* Constants.swift in Sources */,
+				1815E4DA2A32489900444B61 /* Events.swift in Sources */,
+				1815E4E22A326A3700444B61 /* EventComponent.swift in Sources */,
+				1815E4E02A32491700444B61 /* MoreInfoVictim.swift in Sources */,
+				1815E4E62A3393AE00444B61 /* MyRoutesComp.swift in Sources */,
+				1815E4E42A338D8600444B61 /* MyRoutes.swift in Sources */,
+				1815E4DE2A3248E700444B61 /* Map.swift in Sources */,
+				1815E4C92A30E35A00444B61 /* ChatView.swift in Sources */,
+				1815E4DC2A3248CE00444B61 /* ListOfCities.swift in Sources */,
 				1830BB072A2E14E200CFFE66 /* ContentView.swift in Sources */,
 				1830BB132A2E5C9400CFFE66 /* OnBoardingPage2.swift in Sources */,
+				1815E4D82A32484D00444B61 /* NavBar.swift in Sources */,
 				1830BB052A2E14E200CFFE66 /* StolperstaineApp.swift in Sources */,
+				1815E4CD2A30F0F300444B61 /* OpenAIService.swift in Sources */,
+				1815E4D22A31CA1400444B61 /* ButtonBack.swift in Sources */,
+				1815E4D42A31E91F00444B61 /* HomePage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +419,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1815E4CE2A30FDDE00444B61 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1815E4CF2A30FDDE00444B61 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1815E4CE2A30FDDE00444B61 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1830BAF92A2E14E200CFFE66 /* Project object */;
 }

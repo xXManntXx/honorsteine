@@ -28,11 +28,15 @@ struct ContentView: View {
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
                     
+                    Image("ImageDot")
+                        .resizable()
+                        .frame(width: 50, height: 10)
+                        .padding(.vertical, 10)
                     
                     NavigationLink(destination: OnBoardingPage2(), label: {
                                    Text("NEXT")
                                        .font(.system(size: 18))
-                                       .foregroundColor(Color("Yellow"))
+                                       .foregroundColor(.white)
                                        .frame(width: 250, height: 50)
                                        .background(Color.yellow)
                                        .cornerRadius(10)
