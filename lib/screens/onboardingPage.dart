@@ -26,7 +26,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         children: [
           SizedBox(height: 100),
           allOnboardingTips[indexOnboardingTip],
-          HS_text_content(text: "${indexOnboardingTip+1} on ${allOnboardingTips.length}"),
+          HS_text_content(
+              text: "${indexOnboardingTip + 1} on ${allOnboardingTips.length}"),
           HS_button(
             text: "Next",
             onPressed: nextTip,
@@ -38,16 +39,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void nextTip() {
     setState(() {
-      if (indexOnboardingTip+1 >= allOnboardingTips.length) {
+      if (indexOnboardingTip + 1 >= allOnboardingTips.length) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
               builder: (context) => MyHomePage(
                     title: "Honorsteine",
                     allVictims: widget.allVictims,
+                    startingPageIndex: 0,
                   )),
         );
-      }
-      else{
+      } else {
         indexOnboardingTip++;
       }
     });

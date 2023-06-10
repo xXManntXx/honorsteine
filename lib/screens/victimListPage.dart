@@ -15,63 +15,57 @@ class Victim_List extends StatefulWidget {
 class _Victim_ListState extends State<Victim_List> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("All stolpersteine"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FutureBuilder<List<StolpersteineData>>(
-              future: widget.allVictims,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  print('>>> Snasphot has data !');
-                  return Expanded(
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: snapshot.data?.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: ListTile(
-                              leading:
-                                  snapshot.data![index].photoLink.isNotEmpty
-                                      ? Image.network(
-                                          snapshot.data![index].photoLink,
-                                          height: 130,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : SizedBox(),
-                              title: Text(snapshot.data![index].name),
-                              subtitle: Text(
-                                  "Adress : ${snapshot.data![index].city}, ${snapshot.data![index].address} "),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        StolpersteineDetailsPage(
-                                            stolpersteineData:
-                                                snapshot.data![index]),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        }),
-                  );
-                } else if (snapshot.hasError) {
-                  print('>>> Error : ${snapshot.error}');
-                  return Text('error : ${snapshot.error}');
-                }
-                // By default, show a loading spinner.
-                return const CircularProgressIndicator();
-              },
-            ),
-          ],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          FutureBuilder<List<StolpersteineData>>(
+            future: widget.allVictims,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                print('>>> Snasphot has data !');
+                return Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: ListTile(
+                            leading: snapshot.data![index].photoLink.isNotEmpty
+                                ? Image.network(
+                                    snapshot.data![index].photoLink,
+                                    height: 130,
+                                    fit: BoxFit.cover,
+                                  )
+                                : SizedBox(),
+                            title: Text(snapshot.data![index].name),
+                            subtitle: Text(
+                                "Adress : ${snapshot.data![index].city}, ${snapshot.data![index].address} "),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      StolpersteineDetailsPage(
+                                          stolpersteineData:
+                                              snapshot.data![index], allVictims: widget.allVictims,),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                );
+              } else if (snapshot.hasError) {
+                print('>>> Error : ${snapshot.error}');
+                return Text('error : ${snapshot.error}');
+              }
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
+            },
+          ),
+        ],
       ),
     );
   }

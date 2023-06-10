@@ -16,25 +16,28 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   late Future<List<StolpersteineData>> allVictims;
   bool firstUse = true;
-  
-  
+
   @override
   void initState() {
     super.initState();
     allVictims = fetchAPI();
-    
-    Timer(Duration(seconds: 4), () {
 
-      if(firstUse) {
+    Timer(Duration(seconds: 4), () {
+      if (firstUse) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) =>
-              OnBoardingPage(allVictims: allVictims,)),
+          MaterialPageRoute(
+              builder: (context) => OnBoardingPage(
+                    allVictims: allVictims,
+                  )),
         );
-      }
-      else{
+      } else {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) =>
-              MyHomePage(title: "Honorsteine", allVictims: allVictims,)),
+          MaterialPageRoute(
+              builder: (context) => MyHomePage(
+                    title: "Honorsteine",
+                    allVictims: allVictims,
+                    startingPageIndex: 0,
+                  )),
         );
       }
     });
@@ -55,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: FractionalTranslation(
-            translation: Offset(0,-0.003*screenHeight),
+            translation: Offset(0, -0.003 * screenHeight),
             child: CircularProgressIndicator(
               color: Colors.white,
             ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'api/chat_api.dart';
-import 'models/chat_message.dart';
-import 'widgets/message_bubble.dart';
-import 'widgets/message_composer.dart';
+import '../api/chat_api.dart';
+import '../models/chat_message.dart';
+import '../widgets/message_bubble.dart';
+import '../widgets/message_composer.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({
@@ -25,28 +25,25 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Chat')),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                ..._messages.map(
-                  (msg) => MessageBubble(
-                    content: msg.content,
-                    isUserMessage: msg.isUserMessage,
-                  ),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(
+            children: [
+              ..._messages.map(
+                (msg) => MessageBubble(
+                  content: msg.content,
+                  isUserMessage: msg.isUserMessage,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          MessageComposer(
-            onSubmitted: _onSubmitted,
-            awaitingResponse: _awaitingResponse,
-          ),
-        ],
-      ),
+        ),
+        MessageComposer(
+          onSubmitted: _onSubmitted,
+          awaitingResponse: _awaitingResponse,
+        ),
+      ],
     );
   }
 

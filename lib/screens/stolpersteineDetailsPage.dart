@@ -2,19 +2,18 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:honorsteine/API_res/URL_launcher.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
-import 'package:honorsteine/chat_page.dart';
 import 'package:honorsteine/custom_widgets/HS_button.dart';
 
-import '../api/chat_api.dart';
+import 'homePage.dart';
 
 class StolpersteineDetailsPage extends StatelessWidget {
   final StolpersteineData stolpersteineData;
+  final Future<List<StolpersteineData>> allVictims;
 
-  const StolpersteineDetailsPage({required this.stolpersteineData});
+  const StolpersteineDetailsPage({required this.stolpersteineData, required this.allVictims});
 
   @override
   Widget build(BuildContext context) {
-    final ChatApi chatApi = ChatApi();
 
     return Scaffold(
       appBar: AppBar(
@@ -152,10 +151,13 @@ class StolpersteineDetailsPage extends StatelessWidget {
                 text: "Talk with ${stolpersteineData.name}",
                 onPressed: (){
                   print(">>> Redirection to ${stolpersteineData.name} chat bot");
-                  Navigator.push(
-                    context,
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => ChatPage(chatApi: chatApi),
+                      builder: (context) => MyHomePage(
+                        title: "Honorsteine",
+                        allVictims: allVictims,
+                        startingPageIndex: 3,
+                      ),
                     ),
                   );
                 }
