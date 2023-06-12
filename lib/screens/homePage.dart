@@ -20,7 +20,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final ChatApi chatApi = ChatApi();
   late List<Widget> pages;
   late int pageIndex;
   late String pageTitle;
@@ -50,6 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     pageTitle = widget.title;
     pageIndex = widget.startingPageIndex;
+
+    final ChatApi chatApi = ChatApi(widget.victim);
 
     pages = [
       ForYouPage(allVictims: widget.allVictims),
