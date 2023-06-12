@@ -34,19 +34,30 @@ class HS_OnBoardingTip extends StatelessWidget {
   }
 }
 
-List<HS_OnBoardingTip> getAllOnBoardingTips(){
+List<HS_OnBoardingTip> getAllOnBoardingTips() {
   return [
     const HS_OnBoardingTip(
       imageUrl: 'assets/HS_onboarding_1.png',
       title: 'Choose a route',
       content:
-      'Travel through the city, visit stolpersteines and experience the city',
+          'Travel through the city, visit stolpersteines and experience the city',
     ),
     const HS_OnBoardingTip(
       imageUrl: 'assets/HS_onboarding_2.png',
       title: 'Find out whats nearby',
       content:
-      'Granting the Honorsteine app access to your location will allow it to search for stones nearby',
+          'Granting the Honorsteine app access to your location will allow it to search for stones nearby',
+    ),
+    const HS_OnBoardingTip(
+      imageUrl: 'assets/HS_onboarding_3.png',
+      title: 'Create or join routes',
+      content:
+          'Meet people, explore destinations, find intresting stories and things to watch.',
+    ),
+    const HS_OnBoardingTip(
+      imageUrl: 'assets/HS_onboarding_4.png',
+      title: 'Explore Stolpersteine',
+      content: "Let's get started !",
     ),
   ];
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:honorsteine/screens/homePage.dart';
+import 'package:honorsteine/custom_widgets/HS_card.dart';
 
 import '../API_res/stolpersteineData.dart';
 import '../custom_widgets/HS_button.dart';
 import '../custom_widgets/HS_texts.dart';
+import 'homePage.dart';
 
 class ForYouPage extends StatefulWidget {
   const ForYouPage({Key? key, required this.allVictims}) : super(key: key);
@@ -27,6 +28,22 @@ class _ForYouPageState extends State<ForYouPage> {
           const HS_text_content(
             text: '/!\\ App in construction /!\\',
           ),
+          FutureBuilder<List<StolpersteineData>>(
+              future: widget.allVictims,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return HS_card(
+                      title: "Down the road",
+                      content: "Explore eindhoven's stolpersteines",
+                      imageUrl: snapshot.data![1].photoLink,
+                      buttonText: "Join",
+                      onPressed: () {
+                        print(">>> HS_Card button pushed");
+                      });
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
           HS_button(
             text: 'View all Stolpersteine',
             onPressed: () {

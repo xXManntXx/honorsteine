@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 class HS_button extends StatelessWidget {
   final String text;
   final Function onPressed;
+  final double padding;
 
-  const HS_button({required this.text, required this.onPressed});
+  const HS_button({required this.text, required this.onPressed, this.padding = 50.0});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onPressed(),
       child: Padding(
-        padding: const EdgeInsets.all(50.0),
+        padding: EdgeInsets.all(padding),
         child: Container(
           width: double.infinity,
           height: 50.0,

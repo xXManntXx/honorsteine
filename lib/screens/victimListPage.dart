@@ -13,43 +13,75 @@ class Victim_List extends StatefulWidget {
 }
 
 class _Victim_ListState extends State<Victim_List> {
+  String? searchText;
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          TextField(
+            onSubmitted: (value) {
+              setState(() {
+                searchText = value;
+              });
+            },
+            decoration: const InputDecoration(
+              labelText: 'Filter stolpersteine (city, name, ...)',
+              prefixIcon: Icon(Icons.search),
+            ),
+          ),
           FutureBuilder<List<StolpersteineData>>(
             future: widget.allVictims,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 print('>>> Snasphot has data !');
+                final List<StolpersteineData> filteredData =
+                    searchText != null && searchText!.isNotEmpty
+                        ? snapshot.data!
+                            .where((victim) =>
+                                victim.name
+                                    .toLowerCase()
+                                    .contains(searchText!.toLowerCase()) ||
+                                victim.city
+                                    .toLowerCase()
+                                    .contains(searchText!.toLowerCase()) ||
+                                victim.reasonOfPersecussion
+                                    .toLowerCase()
+                                    .contains(searchText!.toLowerCase())||
+                                victim.deathPlace
+                                    .toLowerCase()
+                                    .contains(searchText!.toLowerCase()))
+                            .toList()
+                        : snapshot.data!;
                 return Expanded(
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
-                      itemCount: snapshot.data?.length,
+                      itemCount: filteredData.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: ListTile(
-                            leading: snapshot.data![index].photoLink.isNotEmpty
+                            leading: filteredData[index].photoLink.isNotEmpty
                                 ? Image.network(
-                                    snapshot.data![index].photoLink,
+                                    filteredData[index].photoLink,
                                     height: 130,
                                     fit: BoxFit.cover,
                                   )
-                                : SizedBox(),
-                            title: Text(snapshot.data![index].name),
+                                : const SizedBox(),
+                            title: Text(filteredData[index].name),
                             subtitle: Text(
-                                "Adress : ${snapshot.data![index].city}, ${snapshot.data![index].address} "),
+                                "Adress : ${filteredData[index].city}, ${filteredData[index].address} "),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
                                       StolpersteineDetailsPage(
-                                          stolpersteineData:
-                                              snapshot.data![index], allVictims: widget.allVictims,),
+                                    stolpersteineData: filteredData[index],
+                                    allVictims: widget.allVictims,
+                                  ),
                                 ),
                               );
                             },
