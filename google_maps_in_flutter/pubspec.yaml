@@ -1,5 +1,5 @@
-name: honorsteine
-description: Flutter project Creating an app to enhance experience around stolpersteine
+name: google_maps_in_flutter
+description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=3.0.2 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,15 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  http: ^0.13.6
-  url_launcher: ^6.1.11
-  dart_openai: ^1.8.0
-  markdown_widget: ^2.0.0+1
-  json_serializable: ^6.7.0
-  json_annotation: ^4.8.1
-  flutter_polyline_points: ^1.0.0
-  google_maps_flutter: ^2.1.7
-  location: ^4.4.0
+  google_maps_flutter: ^2.3.0
+  google_maps_flutter_web: ^0.5.0+1
 
 dev_dependencies:
   flutter_test:
@@ -71,12 +64,6 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-  assets:
-    - assets/HS_splash_screen_bg.png
-    - assets/HS_onboarding_1.png
-    - assets/HS_onboarding_2.png
-    - assets/HS_onboarding_3.png
-    - assets/HS_onboarding_4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
