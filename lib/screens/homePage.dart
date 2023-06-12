@@ -3,6 +3,7 @@ import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/screens/chat_page.dart';
 import 'package:honorsteine/screens/forYouPage.dart';
 import 'package:honorsteine/screens/victimListPage.dart';
+import 'package:honorsteine/screens/StolpersteineMap.dart';
 
 import '../api/chat_api.dart';
 
