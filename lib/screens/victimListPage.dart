@@ -4,9 +4,9 @@ import 'package:honorsteine/screens/stolpersteineDetailsPage.dart';
 import 'dart:async';
 
 class Victim_List extends StatefulWidget {
-  const Victim_List({Key? key, required this.allVictims}) : super(key: key);
-
   final Future<List<StolpersteineData>> allVictims;
+
+  const Victim_List({Key? key, required this.allVictims}) : super(key: key);
 
   @override
   State<Victim_List> createState() => _Victim_ListState();

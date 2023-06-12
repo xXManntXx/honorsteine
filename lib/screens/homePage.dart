@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     pages = [
       ForYouPage(allVictims: widget.allVictims),
-      ForYouPage(allVictims: widget.allVictims), //todo replace with map
+      MapPage(allVictims: widget.allVictims),
       Victim_List(allVictims: widget.allVictims),
       ChatPage(chatApi: chatApi)
     ];
