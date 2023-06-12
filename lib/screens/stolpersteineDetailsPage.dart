@@ -157,6 +157,7 @@ class StolpersteineDetailsPage extends StatelessWidget {
                         title: "Honorsteine",
                         allVictims: allVictims,
                         startingPageIndex: 3,
+                        victim: stolpersteineData,
                       ),
                     ),
                   );

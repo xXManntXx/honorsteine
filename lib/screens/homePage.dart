@@ -8,11 +8,12 @@ import 'package:honorsteine/screens/StolpersteineMap.dart';
 import '../api/chat_api.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.allVictims, required this.startingPageIndex});
+  const MyHomePage({super.key, required this.title, required this.allVictims, required this.startingPageIndex, required this.victim});
 
   final String title;
   final Future<List<StolpersteineData>> allVictims;
   final int startingPageIndex;
+  final StolpersteineData victim;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -20,7 +21,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final ChatApi chatApi = ChatApi();
-
   late List<Widget> pages;
   late int pageIndex;
   late String pageTitle;
@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ForYouPage(allVictims: widget.allVictims),
       MapPage(allVictims: widget.allVictims),
       Victim_List(allVictims: widget.allVictims),
-      ChatPage(chatApi: chatApi)
+      ChatPage(chatApi: chatApi, allVictims: widget.allVictims, victim: widget.victim,)
     ];
   }
 

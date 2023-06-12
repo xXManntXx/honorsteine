@@ -37,6 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     title: "Honorsteine",
                     allVictims: allVictims,
                     startingPageIndex: 0,
+                    victim: getDefaultStolpersteineData(),
                   )),
         );
       }

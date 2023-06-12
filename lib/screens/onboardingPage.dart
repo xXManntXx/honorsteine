@@ -46,6 +46,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     title: "Honorsteine",
                     allVictims: widget.allVictims,
                     startingPageIndex: 0,
+                    victim: getDefaultStolpersteineData(),
                   )),
         );
       } else {

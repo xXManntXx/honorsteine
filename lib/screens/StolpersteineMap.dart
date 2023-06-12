@@ -118,7 +118,10 @@ class _MapPageState extends State<MapPage> {
           future: widget.allVictims,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              fetchLocation(snapshot.data!);
+              if(markers.isEmpty) {
+                fetchLocation(snapshot.data!);
+                return CircularProgressIndicator();
+              }
               return GoogleMap(
                 zoomGesturesEnabled: true,
                 initialCameraPosition: CameraPosition(

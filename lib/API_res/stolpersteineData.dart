@@ -53,3 +53,7 @@ class StolpersteineData {
     );
   }
 }
+
+StolpersteineData getDefaultStolpersteineData(){
+  return const StolpersteineData(id: 8206, name: "Dounia Saowski", reasonOfPersecussion: "Joods", address: "Dr. De Meersmanstraat 45", official: true, birthDate: "1920", deathDate: "Overlevende", deathPlace: "nvt", gender: "female", photoLink: "https://cdn.struikelstenengids.nl/img/female_adult.png", url: "null", niodUrl: "null", mapUrl: "https://map.stolpersteine.app/nl/brussel/locaties/rue-meersmans-45-dr-de-meersmanstraat-45", location: [50.8421106, 4.3362021], city: "Brussel");
+}

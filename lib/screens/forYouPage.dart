@@ -52,7 +52,8 @@ class _ForYouPageState extends State<ForYouPage> {
                   builder: (context) => MyHomePage(
                       title: "All stolpersteine",
                       allVictims: widget.allVictims,
-                      startingPageIndex: 2),
+                      startingPageIndex: 2,
+                      victim: getDefaultStolpersteineData(),),
                 ),
               );
             },
