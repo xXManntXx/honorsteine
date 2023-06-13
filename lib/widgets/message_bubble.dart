@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 
+import '../API_res/stolpersteineData.dart';
+
 class MessageBubble extends StatelessWidget {
   const MessageBubble({
     required this.content,
+    required this.victim,
     required this.isUserMessage,
     super.key,
   });
 
+  final StolpersteineData victim;
   final String content;
   final bool isUserMessage;
 
@@ -19,7 +23,7 @@ class MessageBubble extends StatelessWidget {
       decoration: BoxDecoration(
         color: isUserMessage
             ? themeData.colorScheme.primary.withOpacity(0.4)
-            : themeData.colorScheme.secondary.withOpacity(0.4),
+            : themeData.colorScheme.secondary.withOpacity(0.7),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: Padding(
@@ -30,7 +34,7 @@ class MessageBubble extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  isUserMessage ? 'You' : 'AI',
+                  isUserMessage ? 'You' : victim.name.split(" ")[0],
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

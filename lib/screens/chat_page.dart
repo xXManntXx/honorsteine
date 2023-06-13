@@ -44,7 +44,7 @@ class _ChatPageState extends State<ChatPage> {
                       ..._messages.map(
                         (msg) => MessageBubble(
                           content: msg.content,
-                          isUserMessage: msg.isUserMessage,
+                          isUserMessage: msg.isUserMessage, victim: widget.victim,
                         ),
                       ),
                     ],
