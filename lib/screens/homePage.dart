@@ -94,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Colors.amber,
         unselectedItemColor: Colors.grey,
         onTap: setPage,
+        showUnselectedLabels: true,
       ),
     );
   }

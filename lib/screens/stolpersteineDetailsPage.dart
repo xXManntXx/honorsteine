@@ -32,9 +32,8 @@ class StolpersteineDetailsPage extends StatelessWidget {
               content:
                   "${stolpersteineData.reasonOfPersecussion}\n${stolpersteineData.birthDate} - ${stolpersteineData.deathDate}",
               imageUrl: stolpersteineData.photoLink,
-              buttonText: stolpersteineData.gender == "male"
-                  ? "Talk to his chatbot"
-                  : "Talk to her chatbot",
+              buttonText: 
+                  "Talk to ${stolpersteineData.name.split(" ")[0]}",
               onPressed: () {
                 print(">>> Redirection to ${stolpersteineData.name} chat bot");
                 Navigator.of(context).pushReplacement(

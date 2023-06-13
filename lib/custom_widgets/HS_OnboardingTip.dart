@@ -52,7 +52,7 @@ List<HS_OnBoardingTip> getAllOnBoardingTips() {
       imageUrl: 'assets/HS_onboarding_3.png',
       title: 'Create or join routes',
       content:
-          'Meet people, explore destinations, find intresting stories and things to watch.',
+          'Meet people, explore destinations, find interesting stories and things to watch.',
     ),
     const HS_OnBoardingTip(
       imageUrl: 'assets/HS_onboarding_4.png',

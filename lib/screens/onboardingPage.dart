@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/custom_widgets/HS_OnboardingTip.dart';
 import 'package:honorsteine/custom_widgets/HS_button.dart';
+import 'package:honorsteine/custom_widgets/HS_button2.dart';
 import 'package:honorsteine/custom_widgets/HS_texts.dart';
 import 'package:honorsteine/screens/homePage.dart';
 
@@ -34,6 +35,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             text: "Next",
             onPressed: nextTip,
           ),
+           HS_button2(
+            text: "Back",
+            onPressed: backTip,
+          ),
         ],
       ),
     );
@@ -54,6 +59,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         );
       } else {
         indexOnboardingTip++;
+      }
+    });
+  }
+  void backTip() {
+    setState(() {
+      if (indexOnboardingTip == 0) {
+        indexOnboardingTip = 0;
+      } else {
+        indexOnboardingTip--;
       }
     });
   }
