@@ -60,7 +60,7 @@ class HS_card extends StatelessWidget {
                         HS_text_content(text: content),
                         HS_button(
                           onPressed: () => onPressed(),
-                          text: 'Join the walk',
+                          text: buttonText,
                           padding: 8.0,
                         ),
                       ],

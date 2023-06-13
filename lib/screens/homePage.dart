@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/screens/chat_page.dart';
 import 'package:honorsteine/screens/forYouPage.dart';
@@ -8,10 +9,11 @@ import 'package:honorsteine/screens/StolpersteineMap.dart';
 import '../api/chat_api.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.allVictims, required this.startingPageIndex, required this.victim});
+  const MyHomePage({super.key, required this.title, required this.allVictims, required this.startingPageIndex, required this.victim, required this.markers});
 
   final String title;
   final Future<List<StolpersteineData>> allVictims;
+  final Set<Marker> markers;
   final int startingPageIndex;
   final StolpersteineData victim;
 
@@ -53,9 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
     final ChatApi chatApi = ChatApi(widget.victim);
 
     pages = [
-      ForYouPage(allVictims: widget.allVictims),
-      MapPage(allVictims: widget.allVictims),
-      Victim_List(allVictims: widget.allVictims),
+      ForYouPage(allVictims: widget.allVictims, markers: widget.markers,),
+      MapPage(allVictims: widget.allVictims, markers: widget.markers,),
+      Victim_List(allVictims: widget.allVictims, markers: widget.markers,),
       ChatPage(chatApi: chatApi, allVictims: widget.allVictims, victim: widget.victim,)
     ];
   }

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/screens/stolpersteineDetailsPage.dart';
 import 'dart:async';
 
 class Victim_List extends StatefulWidget {
   final Future<List<StolpersteineData>> allVictims;
+  final Set<Marker> markers;
 
-  const Victim_List({Key? key, required this.allVictims}) : super(key: key);
+  const Victim_List({Key? key, required this.allVictims, required this.markers})
+      : super(key: key);
 
   @override
   State<Victim_List> createState() => _Victim_ListState();
@@ -49,7 +52,7 @@ class _Victim_ListState extends State<Victim_List> {
                                     .contains(searchText!.toLowerCase()) ||
                                 victim.reasonOfPersecussion
                                     .toLowerCase()
-                                    .contains(searchText!.toLowerCase())||
+                                    .contains(searchText!.toLowerCase()) ||
                                 victim.deathPlace
                                     .toLowerCase()
                                     .contains(searchText!.toLowerCase()))
@@ -81,6 +84,7 @@ class _Victim_ListState extends State<Victim_List> {
                                       StolpersteineDetailsPage(
                                     stolpersteineData: filteredData[index],
                                     allVictims: widget.allVictims,
+                                    markers: widget.markers,
                                   ),
                                 ),
                               );

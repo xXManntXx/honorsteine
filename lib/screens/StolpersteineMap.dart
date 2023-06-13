@@ -18,8 +18,9 @@ class MyApp extends StatelessWidget {
 
 class MapPage extends StatefulWidget {
   final Future<List<StolpersteineData>> allVictims;
+  final Set<Marker> markers;
 
-  const MapPage({super.key, required this.allVictims});
+  const MapPage({super.key, required this.allVictims, required this.markers});
 
   @override
   _MapPageState createState() => _MapPageState();
@@ -27,8 +28,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   GoogleMapController? mapController;
-  Set<Marker> markers = Set();
-  LatLng showLocation = LatLng(51.4357574, 5.472525300000029);
+  LatLng showLocation = const LatLng(51.4357574, 5.472525300000029);
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _MapPageState extends State<MapPage> {
     super.initState();
   }
 
-  void fetchLocation(List<StolpersteineData> allVictims) async {
+/*  void fetchLocation(List<StolpersteineData> allVictims) async {
     setState(() {
       for (var location in allVictims) {
         markers.add(Marker(
@@ -51,7 +51,7 @@ class _MapPageState extends State<MapPage> {
         ));
       }
     });
-  }
+  }*/
 
 /*  Future<void> fetchAPI() async {
     print(">>> Fetching API ...");
@@ -114,35 +114,44 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FutureBuilder<List<StolpersteineData>>(
-          future: widget.allVictims,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              if(markers.isEmpty) {
-                fetchLocation(snapshot.data!);
-                return CircularProgressIndicator();
+      child: Stack(children: [
+        Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/HS_loading_map_bg.png'),
+                fit: BoxFit.cover,
+          )),
+        ),
+        FutureBuilder<List<StolpersteineData>>(
+            future: widget.allVictims,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                /*if (widget.markers.isEmpty) {
+                  //fetchLocation(snapshot.data!);
+                  return const CircularProgressIndicator();
+                }*/
+                return GoogleMap(
+                  zoomGesturesEnabled: true,
+                  initialCameraPosition: CameraPosition(
+                    target: showLocation,
+                    zoom: 15.0,
+                  ),
+                  markers: widget.markers,
+                  mapType: MapType.normal,
+                  onMapCreated: (controller) {
+                    setState(() {
+                      mapController = controller;
+                    });
+                  },
+                );
+              } else if (snapshot.hasError) {
+                print('>>> Error : ${snapshot.error}');
+                return Text('error : ${snapshot.error}');
               }
-              return GoogleMap(
-                zoomGesturesEnabled: true,
-                initialCameraPosition: CameraPosition(
-                  target: showLocation,
-                  zoom: 15.0,
-                ),
-                markers: markers,
-                mapType: MapType.normal,
-                onMapCreated: (controller) {
-                  setState(() {
-                    mapController = controller;
-                  });
-                },
-              );
-            } else if (snapshot.hasError) {
-              print('>>> Error : ${snapshot.error}');
-              return Text('error : ${snapshot.error}');
-            }
-            // By default, show a loading spinner.
-            return const CircularProgressIndicator();
-          }),
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
+            }),
+      ]),
     );
   }
 }

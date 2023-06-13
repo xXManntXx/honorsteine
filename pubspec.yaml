@@ -73,6 +73,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/HS_splash_screen_bg.png
+    - assets/HS_loading_map_bg.png
     - assets/HS_onboarding_1.png
     - assets/HS_onboarding_2.png
     - assets/HS_onboarding_3.png

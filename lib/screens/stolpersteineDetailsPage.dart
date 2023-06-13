@@ -1,168 +1,144 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:honorsteine/API_res/URL_launcher.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
-import 'package:honorsteine/custom_widgets/HS_button.dart';
+import 'package:honorsteine/custom_widgets/HS_card.dart';
+import 'package:honorsteine/custom_widgets/HS_texts.dart';
 
 import 'homePage.dart';
 
 class StolpersteineDetailsPage extends StatelessWidget {
   final StolpersteineData stolpersteineData;
   final Future<List<StolpersteineData>> allVictims;
+  final Set<Marker> markers;
 
-  const StolpersteineDetailsPage({required this.stolpersteineData, required this.allVictims});
+  const StolpersteineDetailsPage(
+      {required this.stolpersteineData, required this.allVictims, required this.markers});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Stolpersteine Details"),
+        title: const Text("Stolpersteine Details"),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
-              title: Text(
-                stolpersteineData.name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            HS_card(
+              title: stolpersteineData.name,
+              content:
+                  "${stolpersteineData.reasonOfPersecussion}\n${stolpersteineData.birthDate} - ${stolpersteineData.deathDate}",
+              imageUrl: stolpersteineData.photoLink,
+              buttonText: stolpersteineData.gender == "male"
+                  ? "Talk to his chatbot"
+                  : "Talk to her chatbot",
+              onPressed: () {
+                print(">>> Redirection to ${stolpersteineData.name} chat bot");
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(
+                      title: "Honorsteine",
+                      allVictims: allVictims,
+                      startingPageIndex: 3,
+                      victim: stolpersteineData,
+                      markers: markers,
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            HS_text_title(text: "Location"),
+            HS_text_content(
+                text:
+                    "${stolpersteineData.gender == "male" ? "He" : "She"} last lived freely in the city of ${stolpersteineData.city}.\n"
+                    "You can commemorate ${stolpersteineData.gender == "male" ? "him" : "her"} at ${stolpersteineData.address} where lies ${stolpersteineData.gender == "male" ? "his" : "her"} stolpersteine.\n"
+                    "${stolpersteineData.deathPlace == "nvt" ? "${stolpersteineData.gender == "male" ? "He" : "She"} survived the war." : "${stolpersteineData.gender == "male" ? "He" : "She"} died at ${stolpersteineData.deathPlace}"}"),
+            const SizedBox(height: 16),
+            if (stolpersteineData.url != "null" ||
+                stolpersteineData.niodUrl != "null" ||
+                stolpersteineData.mapUrl != "null")
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HS_text_title(
+                      text:
+                          "Learn more about ${stolpersteineData.gender == "male" ? "him" : "her"} here :"),
+                  Padding(
+                    padding: stolpersteineData.url != "null"
+                        ? const EdgeInsets.all(8.0)
+                        : const EdgeInsets.all(0.0),
+                    child: RichText(
+                      text: TextSpan(
+                        text: stolpersteineData.url != "null"
+                            ? stolpersteineData.url
+                            : "",
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            if (stolpersteineData.url != "null") {
+                              launchURL(stolpersteineData.url);
+                            }
+                          },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: stolpersteineData.niodUrl != "null"
+                        ? const EdgeInsets.all(8.0)
+                        : const EdgeInsets.all(0.0),
+                    child: RichText(
+                      text: TextSpan(
+                        text: stolpersteineData.niodUrl != "null"
+                            ? stolpersteineData.niodUrl
+                            : "",
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            if (stolpersteineData.niodUrl != "null") {
+                              launchURL(stolpersteineData.niodUrl);
+                            }
+                          },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: stolpersteineData.mapUrl != "null"
+                        ? const EdgeInsets.all(8.0)
+                        : const EdgeInsets.all(0.0),
+                    child: RichText(
+                      text: TextSpan(
+                        text: stolpersteineData.mapUrl != "null"
+                            ? stolpersteineData.mapUrl
+                            : "",
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            if (stolpersteineData.mapUrl != "null") {
+                              launchURL(stolpersteineData.mapUrl);
+                            }
+                          },
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              subtitle: Text(
-                "Gender: ${stolpersteineData.gender}",
-                style: TextStyle(fontSize: 16),
-              ),
-              trailing: stolpersteineData.photoLink.isNotEmpty
-                  ? Image.network(
-                      stolpersteineData.photoLink,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    )
-                  : SizedBox(),
-            ),
-            SizedBox(height: 16),
-            Text(
-              "Reason of Persecution:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(stolpersteineData.reasonOfPersecussion),
-            SizedBox(height: 16),
-            Text(
-              "Birth Date:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(stolpersteineData.birthDate),
-            SizedBox(height: 16),
-            Text(
-              "Death Date:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(stolpersteineData.deathDate),
-            SizedBox(height: 16),
-            Text(
-              "Death Place:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(stolpersteineData.deathPlace),
-            SizedBox(height: 16),
-            Text(
-              "Address:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(stolpersteineData.address),
-            SizedBox(height: 16),
-            Text(
-              "City:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(stolpersteineData.city),
-            SizedBox(height: 16),
-            Text(
-              "Webpage links:",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      text: stolpersteineData.url.isNotEmpty
-                          ? stolpersteineData.url
-                          : "No URL available.",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          if (stolpersteineData.url.isNotEmpty) {
-                            launchURL(stolpersteineData.url);
-                          }
-                        },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      text: stolpersteineData.niodUrl.isNotEmpty
-                          ? stolpersteineData.niodUrl
-                          : "No niod URL available.",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          if (stolpersteineData.niodUrl.isNotEmpty) {
-                            launchURL(stolpersteineData.niodUrl);
-                          }
-                        },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      text: stolpersteineData.mapUrl.isNotEmpty
-                          ? stolpersteineData.mapUrl
-                          : "No map available.",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          if (stolpersteineData.mapUrl.isNotEmpty) {
-                            launchURL(stolpersteineData.mapUrl);
-                          }
-                        },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            HS_button(
-                text: "Talk with ${stolpersteineData.name}",
-                onPressed: (){
-                  print(">>> Redirection to ${stolpersteineData.name} chat bot");
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => MyHomePage(
-                        title: "Honorsteine",
-                        allVictims: allVictims,
-                        startingPageIndex: 3,
-                        victim: stolpersteineData,
-                      ),
-                    ),
-                  );
-                }
-            )
+            const SizedBox(height: 16),
           ],
         ),
       ),

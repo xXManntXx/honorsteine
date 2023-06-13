@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/custom_widgets/HS_OnboardingTip.dart';
 import 'package:honorsteine/custom_widgets/HS_button.dart';
@@ -7,8 +8,9 @@ import 'package:honorsteine/screens/homePage.dart';
 
 class OnBoardingPage extends StatefulWidget {
   final Future<List<StolpersteineData>> allVictims;
+  final Set<Marker> markers;
 
-  const OnBoardingPage({Key? key, required this.allVictims}) : super(key: key);
+  const OnBoardingPage({Key? key, required this.allVictims, required this.markers}) : super(key: key);
 
   @override
   State<OnBoardingPage> createState() => _OnBoardingPageState();
@@ -47,6 +49,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     allVictims: widget.allVictims,
                     startingPageIndex: 0,
                     victim: getDefaultStolpersteineData(),
+                    markers: widget.markers,
                   )),
         );
       } else {
