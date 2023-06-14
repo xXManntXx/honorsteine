@@ -25,21 +25,25 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(height: 100),
-          allOnboardingTips[indexOnboardingTip],
-          HS_text_content(
-              text: "${indexOnboardingTip + 1} on ${allOnboardingTips.length}"),
-          HS_button(
-            text: "Next",
-            onPressed: nextTip,
-          ),
-           HS_button2(
-            text: "Back",
-            onPressed: backTip,
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 100),
+            allOnboardingTips[indexOnboardingTip],
+            HS_text_content(
+                text: "${indexOnboardingTip + 1} on ${allOnboardingTips.length}"),
+            HS_button(
+              text: "Next",
+              onPressed: nextTip,
+              padding: 30.0,
+            ),
+             HS_button2(
+              text: "Back",
+              onPressed: backTip,
+               padding: 0.0,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,7 +68,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
   void backTip() {
     setState(() {
-      if (indexOnboardingTip == 0) {
+      if (indexOnboardingTip <= 0) {
         indexOnboardingTip = 0;
       } else {
         indexOnboardingTip--;

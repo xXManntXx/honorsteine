@@ -5,7 +5,7 @@ class HS_button2 extends StatelessWidget {
   final Function onPressed;
   final double padding;
 
-  const HS_button2({required this.text, required this.onPressed, this.padding = 50.0});
+  const HS_button2({required this.text, required this.onPressed, this.padding = 10.0});
 
   @override
   Widget build(BuildContext context) {
