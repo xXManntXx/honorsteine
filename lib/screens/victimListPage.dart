@@ -64,14 +64,17 @@ class _Victim_ListState extends State<Victim_List> {
                       itemCount: filteredData.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: ListTile(
                             leading: filteredData[index].photoLink.isNotEmpty
-                                ? Image.network(
-                                    filteredData[index].photoLink,
-                                    height: 130,
-                                    fit: BoxFit.cover,
-                                  )
+                                ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image.network(
+                                      filteredData[index].photoLink,
+                                      height: 130,
+                                      fit: BoxFit.cover,
+                                    ),
+                                )
                                 : const SizedBox(),
                             title: Text(filteredData[index].name),
                             subtitle: Text(

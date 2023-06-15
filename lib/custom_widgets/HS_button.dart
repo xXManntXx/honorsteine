@@ -14,7 +14,6 @@ class HS_button extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(padding),
         child: Container(
-          width: double.infinity,
           height: 50.0,
           decoration: BoxDecoration(
             color: Color(0xFFFABE2C),

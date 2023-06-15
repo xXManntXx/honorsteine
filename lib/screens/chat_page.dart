@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../API_res/stolpersteineData.dart';
 import '../api/chat_api.dart';
+import '../custom_widgets/HS_button.dart';
 import '../models/chat_message.dart';
 import '../widgets/message_bubble.dart';
 import '../widgets/message_composer.dart';
@@ -23,10 +24,28 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final _messages = <ChatMessage>[
-    ChatMessage('Hello, how can I help?', false),
-  ];
+  late final List<ChatMessage> _messages;
   var _awaitingResponse = false;
+  var _autoAnswer1 = "Tell me your story.";
+  var _autoAnswer2 = "How did you experienced war ?";
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _messages = <ChatMessage>[
+      ChatMessage(
+          "Hello, I'm ${widget.victim.name}. Ask me anything about my story.",
+          false),
+    ];
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,21 +53,43 @@ class _ChatPageState extends State<ChatPage> {
         future: widget.allVictims,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //todo give chatAPI the data from victim there
             print(">>> Talking with ${widget.victim.name}");
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _scrollToBottom();
+            });
             return Column(
               children: [
                 Expanded(
                   child: ListView(
+                    controller: _scrollController,
                     children: [
                       ..._messages.map(
                         (msg) => MessageBubble(
                           content: msg.content,
-                          isUserMessage: msg.isUserMessage, victim: widget.victim,
+                          isUserMessage: msg.isUserMessage,
+                          victim: widget.victim,
                         ),
                       ),
                     ],
                   ),
+                ),
+                Row(
+                  children: [
+                    HS_button(
+                      text: _autoAnswer1,
+                      onPressed: (){
+                        _onSubmitted(_autoAnswer1);
+                      },
+                      padding: 5.0,
+                    ),
+                    HS_button(
+                      text: _autoAnswer2,
+                      onPressed: (){
+                        _onSubmitted(_autoAnswer2);
+                      },
+                      padding: 5.0,
+                    ),
+                  ],
                 ),
                 MessageComposer(
                   onSubmitted: _onSubmitted,
@@ -85,4 +126,13 @@ class _ChatPageState extends State<ChatPage> {
       });
     }
   }
+
+  void _scrollToBottom() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
+
 }
