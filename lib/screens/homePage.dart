@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
           pageTitle = "All stolpersteine";
           break;
         case 3 :
-          pageTitle = "Chat bot";
+          pageTitle = "Chat with ${widget.victim.name}";
           break;
       }
     });

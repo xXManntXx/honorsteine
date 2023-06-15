@@ -4,8 +4,9 @@ class HS_button extends StatelessWidget {
   final String text;
   final Function onPressed;
   final double padding;
+  final double fontSize;
 
-  const HS_button({required this.text, required this.onPressed, this.padding = 50.0});
+  const HS_button({required this.text, required this.onPressed, this.padding = 50.0, this.fontSize = 16.0});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,11 @@ class HS_button extends StatelessWidget {
               text,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.0,
+                fontSize: fontSize,
                 fontWeight: FontWeight.bold,
-              ),
+              ),                
+              textAlign: TextAlign.center
+
             ),
           ),
         ),

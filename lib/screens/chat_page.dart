@@ -26,9 +26,37 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   late final List<ChatMessage> _messages;
   var _awaitingResponse = false;
-  var _autoAnswer1 = "Tell me your story.";
-  var _autoAnswer2 = "How did you experienced war ?";
+
+  var askindex = 0;
+  var askindex2 = 0;
+
   late final ScrollController _scrollController;
+  List<String> ww2Questions = [
+  "When did World War II begin?",
+  "Which countries were part of the Axis powers?",
+  "What was the Holocaust?",
+  "Who were the Allied powers?",
+  "When did World War II end?",
+  "What was the significance of D-Day?",
+  "Who were the major leaders during World War II?",
+  "What were some key battles of World War II?",
+  "What was the Manhattan Project?",
+  "How did World War II impact civilians?",
+];
+List<String> jewishLifeQuestions = [
+  "Where were you living during the war?",
+  "Were you forced to leave your home?",
+  "Did you experience discrimination?",
+  "Were your family imprisoned in concentration camps?",
+  "Did you participate in any resistance activities?",
+  "Did you receive any help from others?",
+  "Were you separated from your family members?",
+  "Did you lose any family members?",
+  "How did you maintain your faith?",
+];
+
+
+
 
   @override
   void initState() {
@@ -73,24 +101,45 @@ class _ChatPageState extends State<ChatPage> {
                     ],
                   ),
                 ),
-                Row(
+               Row(
                   children: [
-                    HS_button(
-                      text: _autoAnswer1,
-                      onPressed: (){
-                        _onSubmitted(_autoAnswer1);
-                      },
-                      padding: 5.0,
+                    Expanded(
+                      child: HS_button(
+                        text: ww2Questions[askindex],
+                        onPressed: (){
+                          _onSubmitted(ww2Questions[askindex]);
+                          setState(() {
+                             if (ww2Questions.length == askindex+1){
+                              askindex=0;
+                             }
+                             else{                              
+                              askindex++;
+                              }
+                            });
+                        },
+                        padding: 5.0,
+                      ),
                     ),
-                    HS_button(
-                      text: _autoAnswer2,
-                      onPressed: (){
-                        _onSubmitted(_autoAnswer2);
-                      },
-                      padding: 5.0,
+                    Expanded(
+                       child: HS_button(
+                        text: jewishLifeQuestions[askindex2],
+                        onPressed: (){
+                          _onSubmitted(jewishLifeQuestions[askindex2]);
+                         setState(() {
+                             if (ww2Questions.length == askindex2+1){
+                              askindex2=0;
+                             }
+                             else{                              
+                              askindex2++;
+                              }
+                            });
+                        },
+                        padding: 5.0,
+                      ),
                     ),
                   ],
                 ),
+
                 MessageComposer(
                   onSubmitted: _onSubmitted,
                   awaitingResponse: _awaitingResponse,
