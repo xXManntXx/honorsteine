@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:honorsteine/custom_widgets/HS_button2.dart';
 import 'package:honorsteine/custom_widgets/HS_card.dart';
 import 'package:honorsteine/screens/stolpersteineDetailsPage.dart';
 
@@ -22,6 +23,15 @@ class ForYouPage extends StatefulWidget {
 }
 
 class _ForYouPageState extends State<ForYouPage> {
+  late StolpersteineData randomLocalVictim;
+  late List<StolpersteineData> filteredData;
+
+  void findRandomNeighbour(){
+    Random random = Random();
+    int randomIndex = random.nextInt(filteredData.length);
+    randomLocalVictim = filteredData[randomIndex];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -29,11 +39,11 @@ class _ForYouPageState extends State<ForYouPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const HS_text_title(
-              text: 'Welcome to Honorsteine main page.',
-            ),
-            const HS_text_content(
-              text: '/!\\ App in construction /!\\',
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: HS_text_title(
+                text: 'Your home page',
+              ),
             ),
             FutureBuilder<List<StolpersteineData>>(
                 future: widget.allVictims,
@@ -74,15 +84,12 @@ class _ForYouPageState extends State<ForYouPage> {
                   String searchText =
                       "eindhoven"; //todo change with user location city
                   if (snapshot.hasData) {
-                    final List<StolpersteineData> filteredData = snapshot.data!
+                    filteredData = snapshot.data!
                         .where((victim) =>
                             victim.city.toLowerCase().contains(searchText))
                         .toList();
                     if (filteredData.isNotEmpty) {
-                      Random random = Random();
-                      int randomIndex = random.nextInt(filteredData.length);
-                      StolpersteineData randomLocalVictim =
-                          filteredData[randomIndex];
+                      findRandomNeighbour();
                       return HS_card(
                           title: randomLocalVictim.name,
                           content:
@@ -101,12 +108,21 @@ class _ForYouPageState extends State<ForYouPage> {
                             );
                           });
                     } else {
-                      return SizedBox();
+                      return const SizedBox();
                     }
                   } else {
                     return const CircularProgressIndicator();
                   }
                 }),
+            HS_button2(
+              text: 'Find another one',
+              padding: 2.0,
+              onPressed: (){
+                setState(() {
+                  findRandomNeighbour();
+                });
+              },
+            )
           ],
         ),
       ),

@@ -44,6 +44,7 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   google_maps_flutter: ^2.1.7
   location: ^4.4.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,24 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/HS_logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/HS_logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/HS_logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/HS_logo.png"
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -78,6 +97,7 @@ flutter:
     - assets/HS_onboarding_2.png
     - assets/HS_onboarding_3.png
     - assets/HS_onboarding_4.png
+    - assets/HS_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -68,7 +68,7 @@ class _Victim_ListState extends State<Victim_List> {
                           child: ListTile(
                             leading: filteredData[index].photoLink.isNotEmpty
                                 ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(10.0),
                                   child: Image.network(
                                       filteredData[index].photoLink,
                                       height: 130,
