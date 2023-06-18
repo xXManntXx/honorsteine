@@ -24,17 +24,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void fetchLocation(List<StolpersteineData> allVictims) async{
       for (var location in allVictims) {
+        var markerIcon = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/Marker.png');
         markers.add(Marker(
           markerId: MarkerId(location.id.toString()),
           position: LatLng(location.location[0], location.location[1]),
           infoWindow: InfoWindow(
             title: location.name,
             snippet: location.address,
+
           ),
-          icon: BitmapDescriptor.defaultMarker,
+          icon: markerIcon,
         ));
       }
+
   }
+
 
   @override
   void initState() {
@@ -114,4 +118,6 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
+
 }
