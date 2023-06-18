@@ -1,26 +1,18 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:honorsteine/screens/victimListPage.dart';
 import 'package:location/location.dart' as geoloc;
 import 'package:honorsteine/API_res/stolpersteineData.dart';
-
-/*void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-    );
-  }
-}*/
 
 class MapPage extends StatefulWidget {
   final Future<List<StolpersteineData>> allVictims;
   final Set<Marker> markers;
 
-  const MapPage({super.key, required this.allVictims, required this.markers});
+  const MapPage({Key? key, required this.allVictims, required this.markers})
+      : super(key: key);
 
   @override
   _MapPageState createState() => _MapPageState();
@@ -29,59 +21,15 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   GoogleMapController? mapController;
   LatLng showLocation = const LatLng(51.4357574, 5.472525300000029);
+  Set<Marker> allMarkers = {};
+
 
   @override
   void initState() {
-    // fetchAPI();
-    getCurrentLocation();
     super.initState();
+    getCurrentLocation();
+
   }
-
-/*  void fetchLocation(List<StolpersteineData> allVictims) async {
-    setState(() {
-      for (var location in allVictims) {
-        markers.add(Marker(
-          markerId: MarkerId(location.id.toString()),
-          position: LatLng(location.location[0], location.location[1]),
-          infoWindow: InfoWindow(
-            title: location.name,
-            snippet: location.address,
-          ),
-          icon: BitmapDescriptor.defaultMarker,
-        ));
-      }
-    });
-  }*/
-
-/*  Future<void> fetchAPI() async {
-    print(">>> Fetching API ...");
-    final response = await http.get(Uri.parse(
-        'https://api.struikelstenengids.nl/v2/export/stones?secret=yONOtKGoGO9u9O8pC247jKl9NcDxEl54C2b8N06nzgF9WR6S1I'));
-    if (response.statusCode == 200) {
-      print(">>> Answer received !");
-      var data = json.decode(response.body) as List<dynamic>;
-      List<StolpersteineData> locationsList = [];
-      data.forEach((element) {
-        locationsList.add(StolpersteineData.fromJson(element));
-      });
-      setState(() {
-        for (var location in locationsList) {
-          markers.add(Marker(
-            markerId: MarkerId(location.id.toString()),
-            position: LatLng(location.location[0], location.location[1]),
-            infoWindow: InfoWindow(
-              title: location.name,
-              snippet: location.address,
-            ),
-            icon: BitmapDescriptor.defaultMarker,
-          ));
-        }
-      });
-    } else {
-      print(">>> Failed to retrieve data");
-      throw Exception('Failed to load data');
-    }
-  }*/
 
   Future<void> getCurrentLocation() async {
     final location = geoloc.Location();
@@ -106,52 +54,222 @@ class _MapPageState extends State<MapPage> {
 
     final currentLocation = await location.getLocation();
     setState(() {
-      showLocation =
-          LatLng(currentLocation.latitude!, currentLocation.longitude!);
+      showLocation = LatLng(
+        currentLocation.latitude!,
+        currentLocation.longitude!,
+      );
+    });
+
+    // Move the camera to the current location
+    mapController?.animateCamera(
+      CameraUpdate.newLatLngZoom(showLocation, 15.0),
+    );
+
+    // Add a marker for the current location
+    final ByteData byteData = await rootBundle.load('assets/UserMarker.png');
+    final Uint8List imageData = byteData.buffer.asUint8List();
+    final BitmapDescriptor bitmapDescriptor = BitmapDescriptor.fromBytes(imageData);
+
+    setState(() {
+      allMarkers.add(
+        Marker(
+          markerId: MarkerId('currentLocation'),
+          position: showLocation,
+          infoWindow: InfoWindow(title: 'Current Location'),
+          icon: bitmapDescriptor,
+        ),
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(children: [
-        Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/HS_loading_map_bg.png'),
-                fit: BoxFit.cover,
-          )),
-        ),
-        FutureBuilder<List<StolpersteineData>>(
-            future: widget.allVictims,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                /*if (widget.markers.isEmpty) {
-                  //fetchLocation(snapshot.data!);
-                  return const CircularProgressIndicator();
-                }*/
-                return GoogleMap(
-                  zoomGesturesEnabled: true,
-                  initialCameraPosition: CameraPosition(
-                    target: showLocation,
-                    zoom: 15.0,
+    return Scaffold(
+      body: Stack(
+        children: [
+          GoogleMap(
+            zoomGesturesEnabled: true,
+            initialCameraPosition: CameraPosition(
+              target: showLocation,
+              zoom: 15.0,
+            ),
+            markers: widget.markers.union(allMarkers),
+            mapType: MapType.normal,
+            onMapCreated: (controller) {
+              setState(() {
+                mapController = controller;
+              });
+            },
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              margin: EdgeInsets.all(20),
+              height: 150,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    blurRadius: 20,
+                    offset: Offset.zero,
+                    color: Colors.grey.withOpacity(0.5),
                   ),
-                  markers: widget.markers,
-                  mapType: MapType.normal,
-                  onMapCreated: (controller) {
-                    setState(() {
-                      mapController = controller;
-                    });
-                  },
-                );
-              } else if (snapshot.hasError) {
-                print('>>> Error : ${snapshot.error}');
-                return Text('error : ${snapshot.error}');
-              }
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            }),
-      ]),
+                ],
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  _StolpersteineInfo(),
+                  // Add your other widgets here
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+  Widget _StolpersteineInfo() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(left: 20),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          padding: EdgeInsets.all(16),
+          shrinkWrap: false,
+          physics: ScrollPhysics(),
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+              child: Stack(
+                alignment: Alignment.centerLeft,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.fromLTRB(60, 0, 0, 0),
+                    padding: EdgeInsets.all(0),
+                    width: MediaQuery.of(context).size.width,
+                    height: 130,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(60, 0, 10, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Jacob Sibma",
+                            textAlign: TextAlign.start,
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 8, 0, 12),
+                            child: Text(
+                              "Ellerhuizen 16",
+                              textAlign: TextAlign.start,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: Colors.black,
+                                size: 20,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                                  child: Text(
+                                    "3.711 m/s",
+                                    textAlign: TextAlign.start,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.clip,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              ImageIcon(
+                                NetworkImage(
+                                    "https://cdn4.iconfinder.com/data/icons/various-forms-of-arrows/32/38__top_down_arrow_routes_directions_arrows_up-128.png"),
+                                size: 16,
+                                color: Colors.black,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                                  child: Text(
+                                    "3.711 m/s",
+                                    textAlign: TextAlign.start,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.clip,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+
+                  Image(
+                      image: NetworkImage("https://cdn.struikelstenengids.nl/images/portrait/4bf75d5c-dc87-4751-8c11-52474a6e61fc.jpg"),
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
+
+
+
+
+

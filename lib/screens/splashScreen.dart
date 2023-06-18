@@ -5,11 +5,17 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:honorsteine/API_res/API_fetch.dart';
 import 'package:honorsteine/API_res/stolpersteineData.dart';
 import 'package:honorsteine/custom_widgets/HS_texts.dart';
+import 'package:honorsteine/custom_widgets/HS_infoWindow.dart';
 import 'package:honorsteine/screens/homePage.dart';
 import 'package:honorsteine/screens/onboardingPage.dart';
+import 'package:honorsteine/screens/stolpersteineDetailsPage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  get markers => null;
+
+  get allVictims => null;
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -22,19 +28,34 @@ class _SplashScreenState extends State<SplashScreen> {
   bool dataLoaded = false;
   Set<Marker> markers = {};
 
-  void fetchLocation(List<StolpersteineData> allVictims) async{
-      for (var location in allVictims) {
-        markers.add(Marker(
-          markerId: MarkerId(location.id.toString()),
-          position: LatLng(location.location[0], location.location[1]),
-          infoWindow: InfoWindow(
-            title: location.name,
-            snippet: location.address,
-          ),
-          icon: BitmapDescriptor.defaultMarker,
-        ));
-      }
+  void fetchLocation(List<StolpersteineData> allVictims) async {
+    for (var location in allVictims) {
+      var markerIcon = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/Marker.png');
+      markers.add(Marker(
+        markerId: MarkerId(location.id.toString()),
+        position: LatLng(location.location[0], location.location[1]),
+        infoWindow: CustomInfoWindow(
+          title: location.name,
+          snippet: location.address,
+          photo: location.photoLink,
+          buttonText: "Learn more",
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => StolpersteineDetailsPage(
+                  stolpersteineData: location,
+                  allVictims: widget.allVictims,
+                  markers: widget.markers,
+                ),
+              ),
+            );
+          },
+        ),
+        icon: markerIcon,
+      ));
+    }
   }
+
 
   @override
   void initState() {
