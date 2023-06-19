@@ -63,7 +63,7 @@ Tap the stolpersteine to have more info about them.
 ### Chat bot screen
 Allow the user to discuss with a chatbot trained with the data from a custom stolpersteine (accessed either through the home page, the map or the list). Use gpt-3 IA.
 The user can either enter free text or use the pre-made question tree to talk with the victim.
-/!\ in order to use this functionnality, you need to get a ApiKey from OpenAI. Modify accordingly the chat_api.dart file in the api folder. Also, do not share this key anywhere public (like a git for exemple) because it will instantly be cancel by openAI /!\
+>>> /!\ in order to use this functionnality, you need to get a ApiKey from OpenAI. Modify accordingly the chat_api.dart file in the api folder. Also, do not share this key anywhere public (like a git for exemple) because it will instantly be cancel by openAI /!\
 
 **What could be improved :**
 - Saving conversation
